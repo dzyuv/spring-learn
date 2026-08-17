@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: order-consumer8091
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  config:
+    import: nacos:order-consumer8091.yaml
+server:
+  port: 8091
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: order-producer-group
