@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-service8092
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  config:
+    import: nacos:user-service8092.yaml
+server:
+  port: 8092

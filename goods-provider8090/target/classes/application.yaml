@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: goods-provider8090
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  config:
+    import: nacos:goods-provider8090.yaml
+server:
+  port: 8090
