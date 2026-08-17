@@ -1,11 +1,16 @@
 spring:
   application:
     name: goods-provider8090
+  profiles:
+    active: dev
   cloud:
     nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
       discovery:
         server-addr: localhost:8848
   config:
-    import: nacos:goods-provider8090.yaml
+    import: "nacos:${spring.application.name}-${spring.profiles.active}.yaml?refresh=true"
 server:
   port: 8090

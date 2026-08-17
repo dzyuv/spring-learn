@@ -9,10 +9,10 @@ import com.dzy.userservice8092.dto.TokenPair;
 import com.dzy.userservice8092.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 @RestController
 @RefreshScope
@@ -21,6 +21,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${test.env:default-local}")
+    private String env;
+
+    @GetMapping("/env")
+    public String getEnv() {
+        return "当前环境: " + env;
+    }
+
 
     // 登录接口（白名单，无需 X-User-Id）
     @PostMapping("/login")

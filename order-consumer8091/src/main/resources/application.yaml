@@ -1,12 +1,17 @@
 spring:
   application:
     name: order-consumer8091
+  profiles:
+    active: dev
   cloud:
     nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
       discovery:
         server-addr: localhost:8848
   config:
-    import: nacos:order-consumer8091.yaml
+    import: "nacos:${spring.application.name}-${spring.profiles.active}.yaml?refresh=true"
 server:
   port: 8091
 

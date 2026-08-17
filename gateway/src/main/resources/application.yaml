@@ -1,8 +1,10 @@
 spring:
   config:
-    import: nacos:gateway.yaml
+    import: "nacos:${spring.application.name}-${spring.profiles.active}.yaml?refresh=true"
   application:
     name: gateway
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:
