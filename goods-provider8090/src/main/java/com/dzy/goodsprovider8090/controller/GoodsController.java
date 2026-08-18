@@ -3,6 +3,8 @@ package com.dzy.goodsprovider8090.controller;
 import com.dzy.common.entity.Goods;
 import com.dzy.common.entity.ResultJSON;
 import com.dzy.goodsprovider8090.mapper.GoodsMapper;
+import com.dzy.goodsprovider8090.services.GoodService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +21,13 @@ public class GoodsController {
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
+    private GoodService goodService;
+
     @GetMapping("/get/{gid}")
-    public ResultJSON getGoodById(@PathVariable long gid) {
-        Goods goods = goodsMapper.selectById(gid);
-        if (goods != null) {
-            return ResultJSON.success(goods);
-        }
-        return ResultJSON.error(404, "商品不存在");
+    public ResultJSON getGoodById(@Valid @PathVariable long gid) {
+        Goods goods=goodService.getById(gid);
+        return ResultJSON.success(goods);
     }
 
     @GetMapping("/list")

@@ -1,14 +1,13 @@
 package com.dzy.orderconsumer.client;
 
-
 import com.dzy.common.entity.ResultJSON;
+import com.dzy.orderconsumer.breaker.GoodsClientBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@FeignClient("goods-provider8090")
-//@FeignClient(value = "GOODS-PROVIDER8090",fallback = GoodsClientBreaker.class)   // 服务名
+@FeignClient(value = "GOODS-PROVIDER8090",fallback = GoodsClientBreaker.class)   // 服务名
 public interface GoodsClient {
 
     @GetMapping("/goods/get/{gid}")

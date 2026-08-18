@@ -31,7 +31,6 @@ public class OrderController {
         return ResultJSON.success("消息发送成功: " + message);
     }
 
-
     @GetMapping("/getGoods/{gid}")
     @SentinelResource(value = "getGoods", fallback = "getGoodsFallback")
     public ResultJSON getGoods(@PathVariable Long gid) {

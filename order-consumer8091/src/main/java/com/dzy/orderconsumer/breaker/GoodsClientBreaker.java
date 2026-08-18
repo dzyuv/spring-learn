@@ -14,7 +14,6 @@ public class GoodsClientBreaker implements GoodsClient {
     public ResultJSON getById(Long gid) {
         return ResultJSON.error(503, "商品服务不可用");
     }
-
     @Override
     public ResultJSON list(int page, int size) {
         return ResultJSON.error(503, "商品服务不可用");
