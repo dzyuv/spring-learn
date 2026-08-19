@@ -7,6 +7,7 @@ import com.dzy.orderconsumer.client.GoodsClient;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,11 @@ import java.util.Map;
 @RestController
 @RefreshScope
 @RequestMapping("/order")
+@EnableDiscoveryClient
 public class OrderController {
 
     @Autowired
-    private GoodsClient goodsClient;   // ✅ 注入 Feign 接口
+    private GoodsClient goodsClient;
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
@@ -49,7 +51,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    @GlobalTransactional(name = "create-or              er", rollbackFor = Exception.class)
+    @GlobalTransactional(name = "create-order", rollbackFor = Exception.class)
     public ResultJSON createOrder(@RequestBody Map<String, Object> param) {
         Long goodsId = Long.valueOf(param.get("goodsId").toString());
         int count = Integer.parseInt(param.get("count").toString());

@@ -6,6 +6,7 @@ import com.dzy.goodsprovider8090.mapper.GoodsMapper;
 import com.dzy.goodsprovider8090.services.GoodService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.Map;
 @RestController
 @RefreshScope
 @RequestMapping("/goods")
+@EnableDiscoveryClient
 public class GoodsController {
 
     @Autowired

@@ -9,6 +9,7 @@ import com.dzy.userservice8092.dto.TokenPair;
 import com.dzy.userservice8092.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RefreshScope
 @RequestMapping("/users")
+@EnableDiscoveryClient
 public class UserController {
 
     @Autowired
