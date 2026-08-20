@@ -10,6 +10,11 @@ spring:
         file-extension: yaml
       discovery:
         server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      eager: true
   config:
     import: "nacos:${spring.application.name}-${spring.profiles.active}.yaml?refresh=true"
 server:
