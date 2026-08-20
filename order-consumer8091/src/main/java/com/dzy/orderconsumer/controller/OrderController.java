@@ -33,16 +33,32 @@ public class OrderController {
         return ResultJSON.success("消息发送成功: " + message);
     }
 
+//    @GetMapping("/getGoods/{gid}")
+//    @SentinelResource(value = "getGoods", fallback = "getGoodsFallback")
+//    public ResultJSON getGoods(@PathVariable Long gid) {
+//        return goodsClient.getById(gid);
+//    }
+//
+//    public ResultJSON getGoodsFallback(Long id, Throwable e) {
+//        System.out.println("降级触发，异常信息：" + e.getMessage());
+//        return ResultJSON.error(503, "商品服务挂了，请稍后重试");
+//    }
     @GetMapping("/getGoods/{gid}")
-    @SentinelResource(value = "getGoods", fallback = "getGoodsFallback")
     public ResultJSON getGoods(@PathVariable Long gid) {
+        // 1. 模拟异常测试（异常比例）：当传入 id=0 时，故意抛出异常
+        if (gid == 0) {
+            throw new RuntimeException("模拟商品服务异常");
+        }
+
+        // 2. 模拟慢调用测试（慢调用比例）：每个请求强制休眠 3 秒，超过 RT 阈值
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return goodsClient.getById(gid);
     }
 
-    public ResultJSON getGoodsFallback(Long id, Throwable e) {
-        System.out.println("降级触发，异常信息：" + e.getMessage());
-        return ResultJSON.error(503, "商品服务挂了，请稍后重试");
-    }
 
     @GetMapping("/goodsList")
     public ResultJSON goodsList(@RequestParam(defaultValue = "1") int page,

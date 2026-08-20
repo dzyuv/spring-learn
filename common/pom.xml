@@ -20,6 +20,7 @@
             <optional>true</optional>
         </dependency>
 
+
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -33,6 +34,19 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <!-- 版本由父工程或 BOM 管理，无需指定 -->
+        </dependency>
+
+        <!-- 2. 引入 Spring Web（包含 servlet-api） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 版本由父工程管理 -->
         </dependency>
 
     </dependencies>
